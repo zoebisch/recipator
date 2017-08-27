@@ -13,7 +13,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :index
+    if is_logged_in?(session)
+      @user = current_user(session)
+      erb :index
+    else
+      redirect to "/login"
+    end
   end
 
   post '/signup' do
@@ -35,7 +40,7 @@ class ApplicationController < Sinatra::Base
     if is_logged_in?(session)
       redirect to "/"
     end
-    flash[:message] = "Please Log In"
+    flash[:message] = "Please Log In to browse the Recipator"
     erb :"/users/login"
   end
 

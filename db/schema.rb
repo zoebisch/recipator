@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170827213511) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
+    t.integer "recipe_ids"
   end
 
 end
