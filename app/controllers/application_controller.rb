@@ -15,6 +15,7 @@ class ApplicationController < Sinatra::Base
   get "/" do
     if is_logged_in?(session)
       @user = current_user(session)
+      binding.pry
       erb :index
     else
       redirect to "/login"
