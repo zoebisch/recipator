@@ -1,5 +1,5 @@
 
-module Slugifiable
+module Concerns
 
   module InstanceMethods
 

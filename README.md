@@ -58,7 +58,7 @@ Class Structure
     belongs_to :culture (Most have only one, for purist reasons we will decide on ONE)
     has_many :ingredients
   Ingredients:
-    belongs_to_many :recipes
+    belongs_to :recipes
   Culture:
     has_many :recipes
     has_many :authors, through: :recipes
