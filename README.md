@@ -61,7 +61,7 @@ Class Structure
     belongs_to_many :recipes
   Culture:
     has_many :recipes
-    has_many :authors
+    has_many :authors, through: :recipes
   RecipeIngredients:
     belongs_to :recipe
     belongs_to :ingredient
