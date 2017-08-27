@@ -2,8 +2,7 @@ require './config/environment'
 require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
-  include Concerns::InstanceMethods
-  extend Concerns::ClassMethods
+  include Concerns::HelperMethods
 
   configure do
     set :public_folder, 'public'
