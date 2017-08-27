@@ -1,0 +1,10 @@
+<h1><%= @recipe.name %></h1>
+
+<ul>
+<% @recipe.ingredients_list.each do |ingredient| %>
+    <li><a href="/ingredients/<%= ingredient.slug %>"><%= ingredient.name %></a></li>
+<% end %>
+</ul>
+
+
+<p><a href="/"><h2>Main Menu</h2></a></p>

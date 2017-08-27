@@ -1,0 +1,10 @@
+<h1>Recipes from <%= @author.name %></h1>
+
+<ul>
+<% @author.recipes.each do |recipe| %>
+    <li><a href="/recipes/<%= recipe.slug %>"><%= recipe.name %></a></li>
+<% end %>
+</ul>
+
+
+<p><a href="/"><h2>Main Menu</h2></a></p>
