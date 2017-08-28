@@ -21,7 +21,6 @@ class RecipesController < ApplicationController
   post "/recipes/new" do
     if is_logged_in?(session)
 
-      binding.pry
       @recipe = Recipe.find_or_create_by(params[:recipe])
       if params[:culture][:name] != ""
         @recipe.culture = Culture.find_or_create_by(params[:culture])
@@ -30,25 +29,14 @@ class RecipesController < ApplicationController
       if params[:author][:name] != ""
         @recipe.author = Author.find_or_create_by(params[:author])
       end
-      
+
       if params[:ingredient] != []
         params[:ingredient][:name].split(",").each do |ingredient|
-          binding.pry
           @recipe.ingredients << Ingredient.find_or_create_by({:name => ingredient})
         end
       end
-      # if params[:recipe][:name] != ""
-      #   @recipe = Recipe.create(params[:recipe])
-      #   if params[:culture]
-      #   @recipe.culture<< Culture.create(params[:title])
-      # end
-      # if params[:landmark][:name] != ""
-      #   @recipe.landmarks << Landmark.create(params[:landmark])
-      # end
-      # @recipe.save
-      # params[:ingredient][:name].each do |ingredient|
-      #   Ingredient.find_or_create_by({:name => ingredient})
-      # end
+      flash[:message] = "Successfully created #{@recipe.name}"
+      erb :"/recipes/#{@recipe.slug}"
     else
       flash[:message] = "You must be logged in to create a recipe"
       redirect to "/login"
