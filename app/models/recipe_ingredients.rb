@@ -1,6 +1,4 @@
-class RecipeIngredients < ActiveRecord::Base
-  include Concerns::InstanceMethods
-  extend Concerns::ClassMethods
+class Recipe_Ingredients < ActiveRecord::Base
   belongs_to :recipe
   belongs_to :ingredient
 end

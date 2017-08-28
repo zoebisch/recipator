@@ -8,7 +8,7 @@
 
   <h2> Select a Culture </h2>
   <% Culture.all.each do |culture| %>
-    <input type="radio" name="culture[culture_ids][]" id="<%= culture.name %>" value="<%= culture.id %>">
+    <input type="radio" name="recipe[culture_id]" id="<%= culture.id %>" value="<%= culture.id %>">
       <%= culture.name %>
     </input>
   <% end %>
@@ -19,7 +19,7 @@
 
   <h2> Select an Author </h2>
   <% Author.all.each do |author| %>
-    <input type="radio" name="author[name]" id="<%= author.name %>" value="<%= author.id %>">
+    <input type="radio" name="recipe[author_id]" id="<%= author.name %>" value="<%= author.id %>">
       <%= author.name %>
     </input>
   <% end %>

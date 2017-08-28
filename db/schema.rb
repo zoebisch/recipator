@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20170827213511) do
 
   create_table "recipe_ingredients", force: :cascade do |t|
     t.integer "recipe_id"
-    t.integer "ingredients_id"
+    t.integer "ingredient_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170827213511) do
     t.string "instructions"
     t.integer "total_time"
     t.integer "author_id"
+    t.integer "culture_id"
   end
 
   create_table "users", force: :cascade do |t|

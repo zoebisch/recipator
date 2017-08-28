@@ -5,6 +5,7 @@ class Recipes < ActiveRecord::Migration[5.1]
       t.string  :instructions
       t.integer :total_time
       t.integer :author_id
+      t.integer :culture_id
     end
   end
 end

@@ -6,3 +6,7 @@ ingredients2 = Ingredient.create(name: "Chili", quantity: "16", quantity_type: "
 ingredients3 = Ingredient.create(name: "Pork", quantity: "16", quantity_type: "oz")
 user1 = User.create(username: "Vince", email: "vince@gmail.com", password: "foobar")
 author1.recipes << recipe1
+culture1.recipes << recipe1
+recipe1.ingredients << ingredients1
+recipe1.ingredients << ingredients2
+recipe1.ingredients << ingredients3
