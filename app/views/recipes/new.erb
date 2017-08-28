@@ -1,0 +1,40 @@
+<h1>Create a New Recipe</h1>
+<form action="/recipes/new" method="POST">
+
+  <h2> Recipe Name </h2>
+  <input type="text" name="recipe[name]" id="recipe_name" placeholder="Recipe Name"></input>
+
+  <br></br>
+
+  <h2> Select a Culture </h2>
+  <% Culture.all.each do |culture| %>
+    <input type="radio" name="culture[culture_ids][]" id="<%= culture.name %>" value="<%= culture.id %>">
+      <%= culture.name %>
+    </input>
+  <% end %>
+  <h2> Or Create a New Cultural Origin </h2>
+  <input type="text" name="culture[name]" id="culture_name" placeholder="Recipe Cultural Origin"></input>
+
+  <br></br>
+
+  <h2> Select an Author </h2>
+  <% Author.all.each do |author| %>
+    <input type="radio" name="author[name]" id="<%= author.name %>" value="<%= author.id %>">
+      <%= author.name %>
+    </input>
+  <% end %>
+  <h2> Or Create a New Author </h2>
+  <input type="text" name="author[name]" id="author_name" placeholder="Recipe Author"></input>
+
+  <br></br>
+
+  <h2> Select Ingredients </h2>
+  <% Ingredient.all.each do |ingredient| %>
+    <input type="checkbox" name="recipe[ingredients][]" id="<%= ingredient.name %>" value="<%= ingredient.id %>">
+      <%= ingredient.name %>
+    </input>
+  <% end %>
+  <h2> And/or Add New Ingredients, separated by commas </h2>
+  <input type="text" name="ingredient[name]" id="ingredient_name" placeholder="Ingredients"></input>
+  <input type="submit" value="Create Recipe">
+</form>

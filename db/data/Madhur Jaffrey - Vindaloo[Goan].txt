@@ -1,0 +1,3 @@
+ingredients: "[Pork, 16, oz],[Cumin, 2, tsp],[Chili, 2, chilis]"
+instructions: "cook it all so it's nice"
+total_time: 120
