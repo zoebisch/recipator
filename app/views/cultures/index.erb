@@ -1,0 +1,7 @@
+<h1>Cultures</h1>
+
+<ul>
+<% Culture.all.each do |culture| %>
+    <li><a href="/cultures/<%= culture.slug %>"><%= culture.name %></a></li>
+<% end %>
+</ul>
