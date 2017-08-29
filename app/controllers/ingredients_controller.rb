@@ -9,9 +9,29 @@ class IngredientsController < ApplicationController
     end
   end
 
+  get "/ingredients/new" do
+    if is_logged_in?(session)
+      erb :"/ingredients/new"
+    else
+      flash[:message] = "You must be logged in to add an ingredient"
+      redirect to "/login"
+    end
+  end
+
+  post "/ingredients/new" do
+    if is_logged_in?(session)
+      @ingredient = Ingredient.find_or_create_by(params[:ingredient])
+      redirect to "/ingredients/#{@ingredient.slug}"
+    else
+      flash[:message] = "You must be logged in to add an ingredient"
+      redirect to "/login"
+    end
+  end
+
   get "/ingredients/:slug" do
     if is_logged_in?(session)
       @ingredient = Ingredient.find_by_slug(params[:slug])
+      binding.pry
       erb :"/ingredients/show"
     else
       flash[:message] = "You must be logged in view the ingredients"

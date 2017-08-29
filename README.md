@@ -2,7 +2,10 @@ Recipator
 
 ### Overview
 
-The Recipator is a Sinatra based MVC that tracks authors, recipes, culture (of the recipe) and ingredients.  
+The Recipator is a Sinatra based MVC that tracks authors, recipes, culture (of the recipe) and ingredients.  The intended use
+is for at home with several users and can be extended to a pantry inventory, and with a scanner could be automated.  
+
+The reason for tracking metrics on ingredients is for future development, to let the user know if there is enough on hand to make a dish.
 
 
 ## File Structure
