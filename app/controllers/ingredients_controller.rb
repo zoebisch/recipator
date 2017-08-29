@@ -31,7 +31,6 @@ class IngredientsController < ApplicationController
   get "/ingredients/:slug" do
     if is_logged_in?(session)
       @ingredient = Ingredient.find_by_slug(params[:slug])
-      binding.pry
       erb :"/ingredients/show"
     else
       flash[:message] = "You must be logged in view the ingredients"
@@ -52,7 +51,6 @@ class IngredientsController < ApplicationController
   post "/ingredients/:slug/edit" do
     if is_logged_in?(session) && current_user(session).username == "site_admin" #Uniqueness established on creation
       @ingredient = Ingredient.find_by_slug(params[:slug])
-      binding.pry
       @ingredient.update(params[:ingredient])
 
       redirect to :"/ingredients/#{@ingredient.slug}"

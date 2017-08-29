@@ -1,4 +1,4 @@
-descriptionrecipe1 = Recipe.create(name: "Vindaloo", instructions: "cook it all so it's nice", total_time: 180)
+
 author1 = Author.create(name: "Madhur Jaffrey")
 culture1 = Culture.create(name: "Goan")
 ingredients1 = Ingredient.create(name: "Cumin", quantity: "16", quantity_type: "tsp", origin: "Mediterranean", description: "Cumin is the dried seed of the herb Cuminum cyminum, a member of the parsley family")

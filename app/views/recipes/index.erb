@@ -1,7 +1,15 @@
 <h1>Recipes</h1>
 
-<ul>
-<% Recipe.all.each do |recipe| %>
-    <li><a href="/recipes/<%= recipe.slug %>"><%= recipe.name %></a></li>
+<% Culture.all.each do |culture| %>
+  <h3><%= culture.name %></h3>
+    <ul>
+      <% Recipe.all.each do |recipe| %>
+        <% if recipe.culture == culture %>
+          <li><a href="/recipes/<%= recipe.slug %>"><%= recipe.name %></a></li>
+        <% end %>
+      <% end %>
+    </ul>
 <% end %>
-</ul>
+
+<br></br>
+<p><a href="/"><h3>Main Menu</h3></a></p>

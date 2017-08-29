@@ -2,6 +2,13 @@
 <h2><%= @recipe.culture.name %> Cuisine</h2></a>
 <h2><%= @recipe.author.name %></h2></a>
 
+<br></br>
+<input type="radio" name="user[recipe_id]" id="<%= @recipe.id %>" value="<%= @recipe.name %>"
+  <%='checked' if @user.recipe_ids.include?(@recipe.id) %>> <label> Add to collection?</label>
+</input>
+
+<br></br>
+
 <h2>Ingredients</h2>
 <ul>
 <% @recipe.ingredients.each do |ingredient| %>
@@ -13,5 +20,17 @@
 
 <%= @recipe.instructions %>
 
+<br></br>
 
+<form action="/recipes/<%= @recipe.slug %>/edit" method="GET">
+  <input type="submit" value="Edit Recipe">
+</form>
+
+<br></br>
+
+<form action="/recipes/<%= @recipe.slug %>/delete" method="POST">
+  <input type="submit" value="Delete Recipe">
+</form>
+
+<br></br>
 <p><a href="/"><h2>Main Menu</h2></a></p>

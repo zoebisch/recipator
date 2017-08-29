@@ -1,7 +1,11 @@
-<h1>Ingredients</h1>
+<h2>Ingredients</h2>
+<p><a href="/ingredients/new"><h4>New Ingredient</h4></a></p>
 
 <ul>
 <% Ingredient.all.each do |ingredient| %>
     <li><a href="/ingredients/<%= ingredient.slug %>"><%= ingredient.name %></a></li>
 <% end %>
 </ul>
+
+<br></br>
+<p><a href="/"><h3>Main Menu</h3></a></p>

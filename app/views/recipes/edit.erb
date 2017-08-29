@@ -1,0 +1,41 @@
+<h1>Editing <%= @recipe.name %></h1>
+<form action="/recipes/<%= @recipe.slug %>/edit" method="POST">
+
+  <input type="text" name="recipe[name]" id="recipe_name" value="<%= @recipe.name %>"></input>
+
+  <br></br>
+
+  <% Culture.all.each do |culture| %>
+    <input type="radio" name="recipe[culture_id]" id="<%= culture.id %>" value="<%= culture.id %>"
+    <%='checked' if @recipe.culture == culture %>> <%= culture.name %>
+      <%= culture.name %>
+    </input>
+  <% end %>
+  <h2> Or Create a New Cultural Origin </h2>
+  <input type="text" name="culture[name]" id="culture_name" placeholder="Recipe Cultural Origin"></input>
+
+  <br></br>
+
+  <h2> Select an Author </h2>
+  <% Author.all.each do |author| %>
+    <input type="radio" name="recipe[author_id]" id="<%= author.name %>" value="<%= author.id %>">
+      <%= author.name %>
+    </input>
+  <% end %>
+  <h2> Or Create a New Author </h2>
+  <input type="text" name="author[name]" id="author_name" placeholder="Recipe Author"></input>
+
+  <br></br>
+
+  <h2> Select Ingredients </h2>
+  <% Ingredient.all.each do |ingredient| %>
+    <input type="checkbox" name="recipe[ingredients][]" id="<%= ingredient.name %>" value="<%= ingredient.id %>"
+    <%='checked' if @recipe.ingredients.include?(ingredient) %>> <%= ingredient.name %>
+      <%= ingredient.name %>
+    </input>
+  <% end %>
+
+  <h2> And/or Add New Ingredients, separated by commas </h2>
+  <input type="text" name="ingredient[name]" id="ingredient_name" placeholder="Ingredients"></input>
+  <input type="submit" value="Update Recipe">
+</form>
