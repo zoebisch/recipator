@@ -1,0 +1,8 @@
+<h1>Edit <%= @culture.name %></h1>
+<form action="/cultures/<%= @culture.slug %>/edit" method="POST">
+  <input type="text" name="culture[name]" id="Name" value="<%= @culture.name %>" ></input>
+
+  <br></br>
+
+  <input type="submit" value="Save">
+</form>

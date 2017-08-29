@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20170827213511) do
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
+    t.string "description"
+    t.string "origin"
     t.integer "quantity"
     t.string "quantity_type"
   end
