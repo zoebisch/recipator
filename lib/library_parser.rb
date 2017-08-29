@@ -1,3 +1,5 @@
+#TODO: Make use of this class to work with txt files and add their contents to database
+
 class LibraryParser
   def files
     data_path = File.join(File.dirname(__FILE__), '..', 'db', 'data')

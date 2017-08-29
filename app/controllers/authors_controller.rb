@@ -38,7 +38,6 @@ class AuthorsController < ApplicationController
     end
   end
 
-
   get "/authors/:slug/edit" do
     if is_logged_in?(session) && current_user(session).username == "site_admin" #Uniqueness established on creation
       @author = Author.find_by_slug(params[:slug])
@@ -61,6 +60,5 @@ class AuthorsController < ApplicationController
       redirect to "/login"
     end
   end
-
 
 end
