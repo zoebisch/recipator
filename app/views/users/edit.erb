@@ -1,0 +1,12 @@
+<h1>Edit <%= @user.name %></h1>
+<form action="/users/<%= @user.slug %>/edit" method="POST">
+  <input type="text" name="user[name]" id="Name" value="<%= @user.name %>" ></input>
+
+  <br></br>
+
+  <% @user.recipes.each do |recipe| %>
+      <input type="checkbox" name="recipe[recipe_id][]" id="<%= @recipe.id %>" value="<%= @recipe.name %>"> <%= recipe.name %></input>
+  <% end %>
+
+  <input type="submit" value="Save">
+</form>

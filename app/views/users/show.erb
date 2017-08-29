@@ -1,5 +1,9 @@
-<h1><%= @user.username %>, Here are the recipes in your collection:</h1>
+<h1><%= @user.name %>, Here are the recipes in your collection:</h1>
 
-
-
+<ul>
+  <% @user.recipes.each do |recipe| %>
+    <li><a href="/recipes/<%= recipe.slug %>"><%= recipe.name %></a></li>
+  <% end %>
+</ul>
+<p><a href="/users/<%= @user.slug %>/edit"><h2>Edit Information</h2></a></p>
 <p><a href="/"><h2>Main Menu</h2></a></p>

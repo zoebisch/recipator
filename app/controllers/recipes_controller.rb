@@ -47,7 +47,6 @@ class RecipesController < ApplicationController
     if is_logged_in?(session)
       @recipe= Recipe.find_by_slug(params[:slug])
       @user = current_user(session)
-      binding.pry
       erb :"/recipes/show"
     else
       flash[:message] = "You must be logged in view the recipes"
@@ -81,9 +80,7 @@ class RecipesController < ApplicationController
 
   post "/recipes/:slug/edit" do
     if is_logged_in?(session) && current_user(session).username == "site_admin" #Uniqueness established on creation
-      binding.pry
       @recipe = Recipe.find_by_slug(params[:slug])
-      binding.pry
       @recipe.update(params[:recipe])
 
       redirect to :"/recipes/#{@recipe.slug}"
