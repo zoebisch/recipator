@@ -1,0 +1,8 @@
+<h1>Edit <%= @author.name %></h1>
+<form action="/authors/<%= @author.slug %>/edit" method="POST">
+  <input type="text" name="author[name]" id="Name" value="<%= @author.name %>" ></input>
+
+  <br></br>
+
+  <input type="submit" value="Save">
+</form>

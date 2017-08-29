@@ -5,4 +5,9 @@ class UsersController < ApplicationController
     erb :"/users/show"
   end
 
+  get "/users/new" do
+    erb :"/users/new"
+  end
+
+
 end

@@ -21,6 +21,10 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/signup' do
+    erb :"/users/new"
+  end
+
   post '/signup' do
     user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
     if user.save
@@ -28,7 +32,7 @@ class ApplicationController < Sinatra::Base
       redirect to "/"
     else
       if is_logged_in?(session)
-        redirect to "/tweets"
+        redirect to "/"
       else
         flash[:message] = "Invalid signup parameters"
         redirect to "/signup"

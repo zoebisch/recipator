@@ -12,7 +12,6 @@ class CulturesController < ApplicationController
   get "/cultures/:slug" do
     if is_logged_in?(session)
       @culture = Culture.find_by_slug(params[:slug])
-      binding.pry
       erb :"/cultures/show"
     else
       flash[:message] = "You must be logged in view the cultures"

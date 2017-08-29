@@ -5,9 +5,9 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
+use RecipesController
 use CulturesController
 use AuthorsController
-use RecipesController
 use IngredientsController
 use UsersController
 run ApplicationController
