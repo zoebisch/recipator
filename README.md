@@ -88,3 +88,5 @@ Class Structure
     has_secure_password
     has_many :user_recipes, :class_name => 'User_Recipes'
     has_many :recipes, through: :user_recipes
+
+#Install Instructions
