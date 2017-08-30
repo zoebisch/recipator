@@ -1,5 +1,6 @@
 class AuthorsController < ApplicationController
 
+
   get "/authors" do
     if is_logged_in?(session)
       erb :"/authors/index"
@@ -51,7 +52,6 @@ class AuthorsController < ApplicationController
   post "/authors/:slug/edit" do
     if is_logged_in?(session) && current_user(session).username == "site_admin" #Uniqueness established on creation
       @author = Author.find_by_slug(params[:slug])
-      binding.pry
       @author.update(params[:author])
 
       redirect to :"/authors/#{@author.slug}"
@@ -60,5 +60,17 @@ class AuthorsController < ApplicationController
       redirect to "/login"
     end
   end
+
+  get '/authors/:slug/delete' do
+    if is_logged_in?(session) && current_user(session).name == "site_admin" #Uniqueness established on creation
+      author = Author.find_by_slug(params[:slug])
+      author.delete
+      redirect to "/authors"
+    else
+      flash[:message] = "Only the admin can delete an author"
+      redirect to "/author"
+    end
+  end
+
 
 end

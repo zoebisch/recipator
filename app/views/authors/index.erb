@@ -2,8 +2,12 @@
 
 <ul>
 <% Author.all.each do |author| %>
-    <li><a href="/authors/<%= author.slug %>"><%= author.name %></a></li>
+    <% if author.recipes == []  %>
+      <li><a href="/authors/<%= author.slug %>/delete"><%= author.name %> has no recipes, remove author?</a></li>
+    <% else %>
+      <li><a href="/authors/<%= author.slug %>"><%= author.name %></a></li>
+    <% end %>
 <% end %>
 </ul>
-
-<p><a href="/"><h3>Main Menu</h3></a></p>
+<a href="/authors/new"><h3>Add a New Author</h3></a>
+<a href="/"><h3>Main Menu</h3></a>

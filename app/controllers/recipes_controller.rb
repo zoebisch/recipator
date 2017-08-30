@@ -20,8 +20,9 @@ class RecipesController < ApplicationController
 
   post "/recipes/new" do
     if is_logged_in?(session)
+      @recipe = Recipe.find_or_create_by({:name => params[:recipe][:name]})
+      @recipe.update(params[:recipe])
 
-      @recipe = Recipe.find_or_create_by(params[:recipe])
       if params[:culture][:name] != ""
         @recipe.culture = Culture.find_or_create_by(params[:culture])
       end
@@ -35,10 +36,11 @@ class RecipesController < ApplicationController
           @recipe.ingredients << Ingredient.find_or_create_by({:name => ingredient})
         end
       end
+      @recipe.save
       flash[:message] = "Successfully created #{@recipe.name}"
-      erb :"/recipes/#{@recipe.slug}"
+      redirect to :"/recipes/#{@recipe.slug}"
     else
-      flash[:message] = "You must be logged in to create a recipe"
+      flash[:message] = "Only the admin can edit a recipe"
       redirect to "/login"
     end
   end
@@ -61,13 +63,10 @@ class RecipesController < ApplicationController
 
       if params[:culture][:name] != ""
         @recipe.culture = Culture.find_or_create_by(params[:culture])
-        @recipe.save
-        binding.pry
       end
 
       if params[:author][:name] != ""
         @recipe.author = Author.find_or_create_by(params[:author])
-        binding.pry
       end
 
       if params[:ingredient] != []
@@ -77,7 +76,7 @@ class RecipesController < ApplicationController
       end
       @recipe.save
       flash[:message] = "Successfully updated #{@recipe.name}"
-      binding.pry
+
       redirect to :"/recipes/#{@recipe.slug}"
     else
       flash[:message] = "Only the admin can edit a recipe"

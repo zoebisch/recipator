@@ -30,7 +30,7 @@
 
   <h2> Select Ingredients </h2>
   <% Ingredient.all.each do |ingredient| %>
-    <input type="checkbox" name="recipe[ingredients][]" id="<%= ingredient.name %>" value="<%= ingredient.id %>">
+    <input type="checkbox" name="recipe[ingredient_ids][]" id="<%= ingredient.name %>" value="<%= ingredient.id %>">
       <%= ingredient.name %>
     </input>
   <% end %>
