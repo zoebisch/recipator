@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
 
   get "/users/:id/show" do
-    @user = current_user(session)
-    erb :"/users/show"
+    if is_logged_in?(session)
+      @user = current_user(session)
+      erb :"/users/show"
+    else
+      flash[:message] = "You must be logged in to view your page"
+      redirect to "/login"
+    end
   end
 
   get "/users/new" do
@@ -22,22 +27,20 @@ class UsersController < ApplicationController
   post "/users/:slug/edit" do
     if is_logged_in?(session)
       @user = User.find_by_slug(params[:slug])
-      if params[:recipe] != nil
-        recipe_array = params[:recipe].split(" ")
-        @recipe = Recipe.find_by_name(recipe_array[1])
-        if recipe_array[0] == "Add"
+      if params[:recipe_add_remove] != nil
+        recipe_name = params[:recipe_add_remove].split("Add ")[1] || params[:recipe_add_remove].split("Remove ")[1]
+        @recipe = Recipe.find_by_name(recipe_name)
+        if params[:recipe_add_remove].split(" ")[0] == "Add"
           @user.recipes << @recipe
         else
           @user.recipes.delete(@recipe)
         end
       end
       @user.save
-      
-      @user.update(params[:user]) if params[:user]
-
+      #@user.update(params[:user]) if params[:user] #User is authenticated and unique, so activerecord will not allow altering of username
       redirect to :"/users/#{@user.slug}/show"
     else
-      flash[:message] = "You must be logged in to edit a profile"
+      flash[:message] = "You must be logged in to edit a recipe collection"
       redirect to "/login"
     end
   end

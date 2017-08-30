@@ -1,9 +1,13 @@
-<h1><%= @user.name %>, Here are the recipes in your collection:</h1>
-
+<% if @user.recipes == []%>
+  <h2><%= @user.name %>, There are no recipes in your collection!</h2>
+    <h3><a href="/recipes">Add Some Recipes</a></h3>
+<% else %>
+  <h2><%= @user.name %>, Here are the recipes in your collection:</h2>
+<% end %>
 <ul>
   <% @user.recipes.each do |recipe| %>
     <li><a href="/recipes/<%= recipe.slug %>"><%= recipe.name %></a></li>
   <% end %>
 </ul>
-<p><a href="/users/<%= @user.slug %>/edit"><h2>Edit Information</h2></a></p>
-<p><a href="/"><h2>Main Menu</h2></a></p>
+<p><a href="/users/<%= @user.slug %>/edit"><h3>Edit Recipe Collection</h3></a></p>
+<p><a href="/"><h3>Main Menu</h3></a></p>

@@ -54,15 +54,20 @@ class RecipesController < ApplicationController
     end
   end
 
-  get "/recipes/:slug/edit" do
-    if is_logged_in?(session) && current_user(session).username == "site_admin" #Uniqueness established on creation
+  post "/recipes/:slug/edit" do
+    if is_logged_in?(session) && current_user(session).name == "site_admin" #Uniqueness established on creation
       @recipe = Recipe.find_by_slug(params[:slug])
+      @recipe.update(params[:recipe])
+
       if params[:culture][:name] != ""
         @recipe.culture = Culture.find_or_create_by(params[:culture])
+        @recipe.save
+        binding.pry
       end
 
       if params[:author][:name] != ""
         @recipe.author = Author.find_or_create_by(params[:author])
+        binding.pry
       end
 
       if params[:ingredient] != []
@@ -70,19 +75,9 @@ class RecipesController < ApplicationController
           @recipe.ingredients << Ingredient.find_or_create_by({:name => ingredient})
         end
       end
+      @recipe.save
       flash[:message] = "Successfully updated #{@recipe.name}"
-      erb :"/recipes/#{@recipe.slug}"
-    else
-      flash[:message] = "Only the admin can edit a recipes"
-      redirect to "/login"
-    end
-  end
-
-  post "/recipes/:slug/edit" do
-    if is_logged_in?(session) && current_user(session).username == "site_admin" #Uniqueness established on creation
-      @recipe = Recipe.find_by_slug(params[:slug])
-      @recipe.update(params[:recipe])
-
+      binding.pry
       redirect to :"/recipes/#{@recipe.slug}"
     else
       flash[:message] = "Only the admin can edit a recipe"
@@ -90,13 +85,24 @@ class RecipesController < ApplicationController
     end
   end
 
+  get "/recipes/:slug/edit" do
+    if is_logged_in?(session) && current_user(session).name == "site_admin" #Uniqueness established on creation
+      @recipe = Recipe.find_by_slug(params[:slug])
+      erb :"/recipes/edit"
+    else
+      flash[:message] = "Only the admin can edit a recipe"
+      redirect to "/login"
+    end
+  end
+
   post '/recipes/:slug/delete' do
-    if is_logged_in?(session) && current_user(session).username == "site_admin" #Uniqueness established on creation
-      recipe = Recipe.find_by_slug(params[:slug])
+    recipe = Recipe.find_by_slug(params[:slug])
+    if is_logged_in?(session) && current_user(session).name == "site_admin" #Uniqueness established on creation
       recipe.delete
       redirect to "/recipes"
     else
       flash[:message] = "Only the admin can delete an recipe"
+      redirect to "/recipes/#{recipe.slug}"
     end
   end
 

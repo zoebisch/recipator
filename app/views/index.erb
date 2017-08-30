@@ -1,7 +1,12 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h1>Welcome To The Recipator</h1>
 
 <p><a href="/cultures"><h2>Cultures</h2></a></p>
 <p><a href="/authors"><h2>Authors</h2></a></p>
 <p><a href="/recipes"><h2>Recipes</h2></a></p>
 <p><a href="/ingredients"><h2>Ingredients</h2></a></p>
-<p><a href="/users/<%= @user.id %>/show"><h2>Dashboard</h2></a></p>
+<p><a href="/users/<%= @user.slug %>/show"><h2>Dashboard</h2></a></p>
+<p><a href="/logout"><h2>Log Out</h2></a></p>
