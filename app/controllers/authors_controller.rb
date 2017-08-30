@@ -68,7 +68,7 @@ class AuthorsController < ApplicationController
       redirect to "/authors"
     else
       flash[:message] = "Only the admin can delete an author"
-      redirect to "/author"
+      redirect to "/authors"
     end
   end
 

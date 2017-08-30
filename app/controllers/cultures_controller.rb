@@ -51,13 +51,24 @@ class CulturesController < ApplicationController
   post "/cultures/:slug/edit" do
     if is_logged_in?(session) && current_user(session).username == "site_admin" #Uniqueness established on creation
       @culture = Culture.find_by_slug(params[:slug])
-      binding.pry
       @culture.update(params[:culture])
 
       redirect to :"/cultures/#{@culture.slug}"
     else
       flash[:message] = "You must be logged in to edit an culture"
       redirect to "/login"
+    end
+  end
+
+  get '/cultures/:slug/delete' do
+    if is_logged_in?(session) && current_user(session).name == "site_admin" #Uniqueness established on creation
+      culture = Culture.find_by_slug(params[:slug])
+      culture.delete
+      flash[:message] = "Successfully removed #{culture.name} culture"
+      redirect to "/cultures"
+    else
+      flash[:message] = "Only the admin can delete an culture"
+      redirect to "/cultures"
     end
   end
 

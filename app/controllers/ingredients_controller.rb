@@ -60,4 +60,16 @@ class IngredientsController < ApplicationController
     end
   end
 
+  get '/ingredients/:slug/delete' do
+    if is_logged_in?(session) && current_user(session).name == "site_admin" #Uniqueness established on creation
+      ingredient = Ingredient.find_by_slug(params[:slug])
+      ingredient.delete
+      flash[:message] = "Successfully removed ingredient: #{ingredient.name}"
+      redirect to "/ingredients"
+    else
+      flash[:message] = "Only the admin can delete an ingredient"
+      redirect to "/ingredients"
+    end
+  end
+
 end

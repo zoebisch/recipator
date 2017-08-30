@@ -21,6 +21,7 @@ ingredients7 = Ingredient.create(name: "White Vinegar", quantity: "2", quantity_
 ingredients8 = Ingredient.create(name: "Frank's Hot Sauce", quantity: "3/4", quantity_type: "Cup", origin: "Frank Tea and Spice Company, Cincinatti, Ohio", description: "A well rounded, yet distinct Hot Sauce made from aged Cayenne peppers, distilled vinegar, water, salt and garlic powder.")
 ingredients9 = Ingredient.create(name: "Garlic", quantity: "1/2", quantity_type: "Head", origin: "Middle Asia", description: "A member of the allium family of reknowned flavor for seasoning and staple food. ")
 ingredients10 = Ingredient.create(name: "Unsalted Butter", quantity: "3", quantity_type: "Tbs", origin: "Mediterranean", description: "The product of milkfat that has been separated from the liquid buttermilk through the process of churning.")
+ingredients10 = Ingredient.create(name: "Szechuan Peppercorn", quantity: "3", quantity_type: "oz", origin: "Szechuan Province", description: "The tounge numbing flavor enhancing seed of Prickly Ash Tree, it causes the nerves in the tongue and mouth to vibrate at 50Hz!")
 user2 = User.create(name: "Brian", email: "brian@gmail.com", password: "ninja")
 author2.recipes << recipe2
 culture2.recipes << recipe2

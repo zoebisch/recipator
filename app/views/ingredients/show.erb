@@ -4,4 +4,16 @@
 
 <p><%= @ingredient.description %></p>
 
+<ul>
+  <% @all_recipes = 0 %>
+    <% Recipe.all.each do |recipe| %>
+      <% if !recipe.ingredients.include?(@ingredient) %>
+        <% @all_recipes += 1 %>
+       <% end %>
+    <% end %>
+  <% if @all_recipes == Recipe.all.size %>
+    <li><a href="/ingredients/<%= @ingredient.slug %>/delete"><%= @ingredient.name %> is not used in any recipes, remove ingredient?</a></li>
+  <% end %>
+</ul>
+
 <p><a href="/"><h2>Main Menu</h2></a></p>

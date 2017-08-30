@@ -1,9 +1,17 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h1>Cultures</h1>
 
 <ul>
 <% Culture.all.each do |culture| %>
-    <li><a href="/cultures/<%= culture.slug %>"><%= culture.name %></a></li>
+    <% if culture.recipes == []  %>
+      <li><a href="/cultures/<%= culture.slug %>/delete"><%= culture.name %> has no recipes, remove culture?</a></li>
+    <% else %>
+      <li><a href="/cultures/<%= culture.slug %>"><%= culture.name %></a></li>
+    <% end %>
 <% end %>
 </ul>
-
-<p><a href="/"><h3>Main Menu</h3></a></p>
+<a href="/cultures/new"><h3>Add a New Culture</h3></a>
+<a href="/"><h3>Main Menu</h3></a>

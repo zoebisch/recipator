@@ -1,15 +1,18 @@
 <h1>Update your recipe collection, <%= @user.name %></h1>
 <form action="/users/<%= @user.slug %>/edit" method="POST">
 
-  <% if @user.recipes != []%>
-    <h2>Uncheck recipes you wish to remove from your collection</h2>
-  <% end %>
+<% if @user.recipes != [] %>
+<h2>Check the recipes you wish to remove from your collection</h2>
   <% @user.recipes.each do |recipe| %>
-      <input type="checkbox" name="recipe[recipe_ids][]" id="<%= recipe.id %>" value="<%= recipe.name %>"
-      <%= 'checked' %>> <%= recipe.name %></input>
+    <input type="checkbox" name="user[recipe_ids][]" id="<%= recipe.name %>" value="<%= recipe.id %>"
+      <%='unchecked' %>>
+      <%= recipe.name %>
+    </input>
   <% end %>
+<% else %>
+  <h2><a href="/recipes">Add some recipes!</h2>
+<% end %>
+<br></br>
 
-  <br></br>
-
-  <input type="submit" value="Save">
+<input type="submit" value="Save">
 </form>

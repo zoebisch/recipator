@@ -42,6 +42,7 @@ class ApplicationController < Sinatra::Base
 
   get '/login' do
     if is_logged_in?(session)
+      flash[:message] = "#{current_user(session).name}, you are already logged in!"
       redirect to "/"
     end
     flash[:message] = "Please Log In to browse the Recipator"
@@ -51,6 +52,7 @@ class ApplicationController < Sinatra::Base
   post '/login' do
     user = User.find_by(:name => params[:name])
     if user && user.authenticate(params[:password])
+      flash[:message] = "Welcome, #{user.name}!"
       session[:user_id] = user.id
       redirect to "/"
     else
