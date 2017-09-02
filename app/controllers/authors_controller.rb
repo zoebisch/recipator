@@ -2,7 +2,7 @@ class AuthorsController < ApplicationController
 
 
   get "/authors" do
-    if is_logged_in?(session)
+    if is_logged_in?
       erb :"/authors/index"
     else
       flash[:message] = "You must be logged in view the authors"
@@ -11,7 +11,7 @@ class AuthorsController < ApplicationController
   end
 
   get "/authors/new" do
-    if is_logged_in?(session)
+    if is_logged_in?
       erb :"/authors/new"
     else
       flash[:message] = "You must be logged in to add an author"
@@ -20,7 +20,7 @@ class AuthorsController < ApplicationController
   end
 
   post "/authors/new" do
-    if is_logged_in?(session)
+    if is_logged_in?
       @author = Author.find_or_create_by(params[:author])
       redirect to "/authors/#{@author.slug}"
     else
@@ -30,7 +30,7 @@ class AuthorsController < ApplicationController
   end
 
   get "/authors/:slug" do
-    if is_logged_in?(session)
+    if is_logged_in?
       @author = Author.find_by_slug(params[:slug])
       erb :"/authors/show"
     else
@@ -40,7 +40,7 @@ class AuthorsController < ApplicationController
   end
 
   get "/authors/:slug/edit" do
-    if is_logged_in?(session) && current_user(session).username == "site_admin" #Uniqueness established on creation
+    if is_logged_in? && current_user.username == "site_admin" #Uniqueness established on creation
       @author = Author.find_by_slug(params[:slug])
       erb :"/authors/edit"
     else
@@ -50,7 +50,7 @@ class AuthorsController < ApplicationController
   end
 
   post "/authors/:slug/edit" do
-    if is_logged_in?(session) && current_user(session).username == "site_admin" #Uniqueness established on creation
+    if is_logged_in? && current_user.username == "site_admin" #Uniqueness established on creation
       @author = Author.find_by_slug(params[:slug])
       @author.update(params[:author])
 
@@ -62,7 +62,7 @@ class AuthorsController < ApplicationController
   end
 
   get '/authors/:slug/delete' do
-    if is_logged_in?(session) && current_user(session).name == "site_admin" #Uniqueness established on creation
+    if is_logged_in? && current_user.name == "site_admin" #Uniqueness established on creation
       author = Author.find_by_slug(params[:slug])
       author.delete
       redirect to "/authors"

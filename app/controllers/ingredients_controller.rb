@@ -1,7 +1,7 @@
 class IngredientsController < ApplicationController
 
   get "/ingredients" do
-    if is_logged_in?(session)
+    if is_logged_in?
       erb :"/ingredients/index"
     else
       flash[:message] = "You must be logged in view the ingredients"
@@ -10,7 +10,7 @@ class IngredientsController < ApplicationController
   end
 
   get "/ingredients/new" do
-    if is_logged_in?(session)
+    if is_logged_in?
       erb :"/ingredients/new"
     else
       flash[:message] = "You must be logged in to add an ingredient"
@@ -19,7 +19,7 @@ class IngredientsController < ApplicationController
   end
 
   post "/ingredients/new" do
-    if is_logged_in?(session)
+    if is_logged_in?
       @ingredient = Ingredient.find_or_create_by(params[:ingredient])
       redirect to "/ingredients/#{@ingredient.slug}"
     else
@@ -29,7 +29,7 @@ class IngredientsController < ApplicationController
   end
 
   get "/ingredients/:slug" do
-    if is_logged_in?(session)
+    if is_logged_in?
       @ingredient = Ingredient.find_by_slug(params[:slug])
       erb :"/ingredients/show"
     else
@@ -39,7 +39,7 @@ class IngredientsController < ApplicationController
   end
 
   get "/ingredients/:slug/edit" do
-    if is_logged_in?(session) && current_user(session).username == "site_admin" #Uniqueness established on creation
+    if is_logged_in? && current_user.username == "site_admin" #Uniqueness established on creation
       @ingredient = Ingredient.find_by_slug(params[:slug])
       erb :"/ingredients/edit"
     else
@@ -49,7 +49,7 @@ class IngredientsController < ApplicationController
   end
 
   post "/ingredients/:slug/edit" do
-    if is_logged_in?(session) && current_user(session).username == "site_admin" #Uniqueness established on creation
+    if is_logged_in? && current_user.username == "site_admin" #Uniqueness established on creation
       @ingredient = Ingredient.find_by_slug(params[:slug])
       @ingredient.update(params[:ingredient])
 
@@ -61,7 +61,7 @@ class IngredientsController < ApplicationController
   end
 
   get '/ingredients/:slug/delete' do
-    if is_logged_in?(session) && current_user(session).name == "site_admin" #Uniqueness established on creation
+    if is_logged_in? && current_user.name == "site_admin" #Uniqueness established on creation
       ingredient = Ingredient.find_by_slug(params[:slug])
       ingredient.delete
       flash[:message] = "Successfully removed ingredient: #{ingredient.name}"

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
   get "/users/:id/show" do
-    if is_logged_in?(session)
-      @user = current_user(session)
+    if is_logged_in?
+      @user = current_user
       erb :"/users/show"
     else
       flash[:message] = "You must be logged in to view your page"
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   get "/users/:slug/edit" do
-    if is_logged_in?(session)
+    if is_logged_in?
       @user = User.find_by_slug(params[:slug])
       erb :"/users/edit"
     else
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   post "/users/:slug/edit" do
-    if is_logged_in?(session)
+    if is_logged_in?
       @user = User.find_by_slug(params[:slug])
       if params[:user]
         params[:user][:recipe_ids].each do |id|

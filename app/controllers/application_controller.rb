@@ -2,7 +2,6 @@ require './config/environment'
 require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
-  include Concerns::HelperMethods
 
   configure do
     set :public_folder, 'public'
@@ -13,11 +12,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    if is_logged_in?(session)
-      @user = current_user(session)
-      erb :index
+    if is_logged_in?
+      @user = current_user
+      erb :'index'
     else
-      redirect to "/login"
+      redirect to '/login'
     end
   end
 
@@ -31,17 +30,17 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = user.id
       redirect to "/"
     else
-      if is_logged_in?(session)
+      if is_logged_in?
         redirect to "/"
       else
-        flash[:message] = "Invalid signup parameters"
+        flash[:message] = user.errors.full_messages.join(', ')
         redirect to "/signup"
       end
     end
   end
 
   get '/login' do
-    if is_logged_in?(session)
+    if is_logged_in?
       redirect to "/"
     end
     flash[:message] = "Please Log In to browse the Recipator"
@@ -61,12 +60,22 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    if is_logged_in?(session)
+    if is_logged_in?
       session.clear
       redirect to '/login'
     else
       redirect to '/'
     end
   end
+
+  private
+
+    def current_user
+      User.find_by_id(session[:user_id])
+    end
+
+    def is_logged_in?
+      !!session[:user_id]
+    end
 
 end
