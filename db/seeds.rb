@@ -4,7 +4,7 @@ culture1 = Culture.create(name: "Goan")
 ingredients1 = Ingredient.create(name: "Cumin", quantity: "16", quantity_type: "tsp", origin: "Mediterranean", description: "Cumin is the dried seed of the herb Cuminum cyminum, a member of the parsley family")
 ingredients2 = Ingredient.create(name: "Chili", quantity: "16", quantity_type: "chilis", origin: "Mexico", description: "The chili pepper (also chile pepper chilli pepper, or simply chilli, from Nahuatl chīlli Nahuatl) is the fruit of plants from the genus Capsicum, members of the nightshade family, Solanaceae. They are widely used in many cuisines to add spiciness to dishes. The substances that give chili peppers their intensity when ingested are compounds known as capsaicinoids.")
 ingredients3 = Ingredient.create(name: "Pork", quantity: "16", quantity_type: "oz", origin: "Asia", description: "Pork is the culinary name for meat from a domestic pig")
-user1 = User.create(name: "Vince", email: "vince@gmail.com", password: "foobar")
+user1 = User.create(name: "Madhur Jaffrey", email: "madhur@gmail.com", password: "foobar")
 recipe1 = Recipe.create(name: "Vindaloo", instructions: "cook it all so it's nice", total_time: 180)
 author1.recipes << recipe1
 culture1.recipes << recipe1
